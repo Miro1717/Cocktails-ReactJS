@@ -24,8 +24,9 @@ a:hover {
 }
 
 body {
+  background-image: url(https://www.asia-bars.com/wp-content/uploads/2019/08/gallery-cocktail-bar.jpg);
   margin: 0;
-  display: flex;
+  display: flexbox;
   place-items: center;
   min-width: 320px;
   min-height: 100vh;
