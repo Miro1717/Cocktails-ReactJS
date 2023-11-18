@@ -8,7 +8,7 @@ const Login = function () {
     <div
       style={{
         position: "absolute",
-        top: "50%",
+        top: "200px",
         left: "50%",
         transform: "translate(-50%, -50%)",
         padding: "10px",
