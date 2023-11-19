@@ -1,20 +1,28 @@
-import Button from "react-bootstrap/Button";
-import Card from "react-bootstrap/Card";
+import * as cocktailServices from "../../services/cocktail/cocktailServices";
+import CocktailsItem from "./CocktailItem";
+import { useState, useEffect } from "react";
 
 const CocktailCatalog = function () {
+  const [cocktails, setCocktails] = useState([]);
+
+  useEffect(() => {
+    cocktailServices.getAll().then((result) => setCocktails(result));
+  }, []);
+
   return (
-    <div>
-      <Card style={{ width: "18rem" }}>
-        <Card.Img
-          variant="top"
-          src="https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8Y29ja3RhaWx8ZW58MHx8MHx8fDA%3D"
-        />
-        <Card.Body>
-          <Card.Title>Cocktail Name</Card.Title>
-          <Card.Text>Rum Cocktail</Card.Text>
-          <Button variant="primary">Details</Button>
-        </Card.Body>
-      </Card>
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "row",
+        flexWrap: "wrap",
+        margin: "10px",
+      }}
+    >
+      {cocktails.map((cocktail) => (
+        <CocktailsItem key={cocktail._id} {...cocktail} />
+      ))}
+
+      {cocktails.length === 0 && <h3>No articles yet</h3>}
     </div>
   );
 };

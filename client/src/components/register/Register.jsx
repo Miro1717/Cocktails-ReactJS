@@ -15,7 +15,7 @@ const Register = function () {
       }}
     >
       <FloatingLabel
-        controlId="floatingInput"
+        controlId="floatingInputEmail"
         label="Email address"
         className="mb-3"
       >
@@ -33,21 +33,21 @@ const Register = function () {
         <Form.Control type="password" placeholder="Password" />
       </FloatingLabel>
       <FloatingLabel
-        controlId="floatingPassword"
+        controlId="floatingRePassword"
         label="rePassword"
         style={{ marginTop: "10px" }}
       >
         <Form.Control type="password" placeholder="Password" />
       </FloatingLabel>
       <FloatingLabel
-        controlId="floatingInput"
+        controlId="floatingInputFirstName"
         label="First name"
         style={{ marginTop: "10px" }}
       >
         <Form.Control type="text" placeholder="John" />
       </FloatingLabel>
       <FloatingLabel
-        controlId="floatingInput"
+        controlId="floatingInputLastName"
         label="Last name"
         style={{ marginTop: "10px" }}
       >

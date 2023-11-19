@@ -1,0 +1,23 @@
+{
+    "0dcffff8-61f4-4437-97d3-39366f55b5e7": {
+        "cocktailName": "Manhattan Transfer",
+        "AlcoholType": "Gin Cocktail",
+        "imageUrl": "https://www.liquor.com/thmb/e3YypkUO9NN7L2NJMhqHNFrvV7s=/750x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/manhattan-transfer-4000x4000-primary-ig-5acbc04f52a243d8b152da3b71a8245f.jpg",
+        "description": "1 1/2 ounces 100 proof rye whiskey\n1 ounce dry vermouth\n1 ounce Ramazzotti\n1 dash orange bitters\nGarnish: orange twist",
+        "_id": "0dcffff8-61f4-4437-97d3-39366f55b5e7"
+    },
+    "3917cf9b-5eac-44b3-95da-5f51075fc34a": {
+        "cocktailName": "Vegan Milk Punch",
+        "AlcoholType": "Rum Cocktail",
+        "imageUrl": "https://www.liquor.com/thmb/nEXalmqa70cnWfrZtPV6ySYlmTo=/750x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/Vegan_Milk_Punch_Courtesy_Botanica_1000x1000_primary-b577c586138e4e47afceabcfaf5f71de.jpg",
+        "description": "1 1/2 ounces cachaça\n3/4 ounce simple syrup\n1/2 ounce sherry\n1/4 ounce lime juice\n1 ounce coconut milk\n3 dashes bitters\n1 pinch salt\nGarnish: lime twist",
+        "_id": "3917cf9b-5eac-44b3-95da-5f51075fc34a"
+    },
+    "468916fa-44bc-4ec1-be3c-517536554b20": {
+        "cocktailName": "Bomb Pop",
+        "AlcoholType": "Vodka Cocktail",
+        "imageUrl": "https://www.liquor.com/thmb/psIn1FpGgFMi4OVkIjegmbdS86c=/750x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/bomb-pop-720x720-primary-753615c99bc643179ddf4f6ebcfb2d9a.jpg",
+        "description": "1 ounce grenadine\n1 ounce citron vodka\n1 1/4 ounces blue mix*",
+        "_id": "468916fa-44bc-4ec1-be3c-517536554b20"
+    }
+}
