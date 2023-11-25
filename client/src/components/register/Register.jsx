@@ -32,7 +32,7 @@ const Register = function () {
       }}
     >
       <FloatingLabel
-        controlId="floatingInputEmail"
+        controlId="floatingInputRegisterEmail"
         label="Email address"
         className="mb-3"
       >

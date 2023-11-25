@@ -13,6 +13,7 @@ import Login from "./components/login/Login";
 import Register from "./components/register/Register";
 import MyProfile from "./components/user-profile/MyProfile";
 import NotFound from "./components/not-found/NotFound";
+import Details from "./components/cocktail-details/CocktailDetails";
 import Edit from "./components/cocktail-edit/CocktailEdit";
 import Logout from "./components/logout/Logout";
 import AuthContext from "./context/authContext";
@@ -63,6 +64,10 @@ function App() {
           <Route path="/cocktails/catalog" element={<Catalog />}></Route>
           <Route path="/cocktails/create" element={<Create />}></Route>
           <Route path="/cocktails/edit" element={<Edit />}></Route>
+          <Route
+            path="/cocktails/:cocktailsId/details"
+            element={<Details />}
+          ></Route>
           <Route path="/users/profile" element={<MyProfile />}></Route>
           <Route path="users/login" element={<Login />}></Route>
           <Route path="users/register" element={<Register />}></Route>

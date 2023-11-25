@@ -1,4 +1,4 @@
-footer {
+.footer {
     margin-top: 50px;
     text-align: center;
     background: rgb(33,37,41);
@@ -8,3 +8,4 @@ footer {
     bottom: 0;
     width: 100%;
 }
+
