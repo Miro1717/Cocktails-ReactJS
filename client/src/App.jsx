@@ -64,10 +64,7 @@ function App() {
           <Route path="/cocktails/catalog" element={<Catalog />}></Route>
           <Route path="/cocktails/create" element={<Create />}></Route>
           <Route path="/cocktails/edit" element={<Edit />}></Route>
-          <Route
-            path="/cocktails/:cocktailsId/details"
-            element={<Details />}
-          ></Route>
+          <Route path="/cocktails/:id" element={<Details />}></Route>
           <Route path="/users/profile" element={<MyProfile />}></Route>
           <Route path="users/login" element={<Login />}></Route>
           <Route path="users/register" element={<Register />}></Route>

@@ -1,0 +1,11 @@
+  
+  .info {
+    color: white;
+    letter-spacing: 1px;
+    display: inline-block;
+  }
+  
+  .info img {
+    width: 30%;
+    height: inherit;
+  }
