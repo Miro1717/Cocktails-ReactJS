@@ -2,10 +2,27 @@ import { Link } from "react-router-dom";
 import FloatingLabel from "react-bootstrap/FloatingLabel";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
+import { useContext } from "react";
+import AuthContext from "../../context/authContext";
+import useForm from "../../hooks/useForm";
+
+const RegisterFormKeys = {
+  Email: "email",
+  Password: "password",
+  RePassword: "rePassword",
+};
 
 const Register = function () {
+  const { registerSubmitHandler } = useContext(AuthContext);
+  const { values, onChange, onSubmit } = useForm(registerSubmitHandler, {
+    [RegisterFormKeys.Email]: "",
+    [RegisterFormKeys.Password]: "",
+    [RegisterFormKeys.RePassword]: "",
+  });
+
   return (
-    <div
+    <form
+      onSubmit={onSubmit}
       style={{
         position: "absolute",
         top: "300px",
@@ -22,6 +39,9 @@ const Register = function () {
         <Form.Control
           type="email"
           placeholder="name@example.com"
+          onChange={onChange}
+          name={[RegisterFormKeys.Email]}
+          value={values[RegisterFormKeys.Email]}
           style={{ marginTop: "10px" }}
         />
       </FloatingLabel>
@@ -30,14 +50,26 @@ const Register = function () {
         label="Password"
         style={{ marginTop: "10px" }}
       >
-        <Form.Control type="password" placeholder="Password" />
+        <Form.Control
+          type="password"
+          placeholder="Password"
+          name={[RegisterFormKeys.Password]}
+          onChange={onChange}
+          value={values[RegisterFormKeys.Password]}
+        />
       </FloatingLabel>
       <FloatingLabel
         controlId="floatingRePassword"
         label="rePassword"
         style={{ marginTop: "10px" }}
       >
-        <Form.Control type="password" placeholder="Password" />
+        <Form.Control
+          type="password"
+          placeholder="Password"
+          name={[RegisterFormKeys.RePassword]}
+          onChange={onChange}
+          value={values[RegisterFormKeys.RePassword]}
+        />
       </FloatingLabel>
       <FloatingLabel
         controlId="floatingInputFirstName"
@@ -54,7 +86,11 @@ const Register = function () {
         <Form.Control type="text" placeholder="Doe" />
       </FloatingLabel>
 
-      <Button variant="secondary" style={{ margin: "10px 140px" }}>
+      <Button
+        variant="secondary"
+        type="submit"
+        style={{ margin: "10px 140px" }}
+      >
         Register
       </Button>
       <p style={{ color: "white", margin: "20px" }}>
@@ -62,7 +98,7 @@ const Register = function () {
           If you already have profile click <Link to="/users/login">here</Link>
         </span>
       </p>
-    </div>
+    </form>
   );
 };
 

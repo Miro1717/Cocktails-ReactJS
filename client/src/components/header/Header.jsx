@@ -1,27 +1,52 @@
 import { Link } from "react-router-dom";
-import Container from 'react-bootstrap/Container';
-import Nav from 'react-bootstrap/Nav';
-import Navbar from 'react-bootstrap/Navbar';
-
-
+import Container from "react-bootstrap/Container";
+import Nav from "react-bootstrap/Nav";
+import Navbar from "react-bootstrap/Navbar";
+import { useContext } from "react";
+import AuthContext from "../../context/authContext";
 
 const Header = function () {
+  const { isAuthenticated, username } = useContext(AuthContext);
+
   return (
     <>
-   <Navbar bg="dark" data-bs-theme="dark" >
+      <Navbar bg="dark" data-bs-theme="dark">
         <Container>
-          <Navbar.Brand as={Link} to="/">Home</Navbar.Brand>
+          <Navbar.Brand as={Link} to="/">
+            Home
+          </Navbar.Brand>
           <Nav className="me-auto">
-            <Nav.Link as={Link} to="/cocktails/catalog">Catalog</Nav.Link>
-            <Nav.Link as={Link} to="/cocktails/create">Create Cocktails</Nav.Link>
-            <Nav.Link as={Link} to="/users/profile">Profile</Nav.Link>
-            <Nav.Link as={Link} to="/users/logout">Logout</Nav.Link>
-            <Nav.Link as={Link} to="/users/register">Register</Nav.Link>
-            <Nav.Link as={Link} to="/users/login">Login</Nav.Link>
+            <Nav.Link as={Link} to="/cocktails/catalog">
+              Catalog
+            </Nav.Link>
+            {isAuthenticated && (
+              <>
+                <Nav.Link as={Link} to="/cocktails/create">
+                  Create Cocktails
+                </Nav.Link>
+                <Nav.Link as={Link} to="/users/profile">
+                  Profile
+                </Nav.Link>
+                <Nav.Link as={Link} to="/users/logout">
+                  Logout
+                </Nav.Link>
+              </>
+            )}
+
+            {!isAuthenticated && (
+              <>
+                <Nav.Link as={Link} to="/users/login">
+                  Login
+                </Nav.Link>
+                <Nav.Link as={Link} to="/users/register">
+                  Register
+                </Nav.Link>
+              </>
+            )}
           </Nav>
         </Container>
       </Navbar>
-    
+
       {/* <nav>
        <ul className="menu">
          <li>
@@ -47,7 +72,7 @@ const Header = function () {
          </li>
        </ul>
      </nav>  */}
-     </>
+    </>
   );
 };
 
