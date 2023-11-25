@@ -14,30 +14,44 @@ import Register from "./components/register/Register";
 import MyProfile from "./components/user-profile/MyProfile";
 import NotFound from "./components/not-found/NotFound";
 import Edit from "./components/cocktail-edit/CocktailEdit";
+import Logout from "./components/logout/Logout";
 import AuthContext from "./context/authContext";
 
 function App() {
   const navigate = useNavigate();
-  const [auth, setAuth] = useState({});
+  const [auth, setAuth] = useState(() => {
+    localStorage.removeItem("accessToken");
+    return {};
+  });
 
   const loginSubmitHandler = async (values) => {
     const result = await authService.login(values.email, values.password);
 
     setAuth(result);
+    localStorage.setItem("accessToken", result.accessToken);
 
     navigate(Path.Home);
   };
 
   const registerSubmitHandler = async (values) => {
-    console.log(values);
+    const result = await authService.register(values.email, values.password);
+    setAuth(result);
+    localStorage.setItem("accessToken", result.accessToken);
+    navigate(Path.Home);
+  };
+
+  const logoutHandler = () => {
+    setAuth({});
+    localStorage.removeItem("accessToken");
   };
 
   const values = {
     loginSubmitHandler,
     registerSubmitHandler,
-    username: auth.username,
+    logoutHandler,
+    username: auth.username || auth.email,
     email: auth.email,
-    isAuthenticated: !!auth.username,
+    isAuthenticated: !!auth.accessToken,
   };
 
   return (
@@ -52,6 +66,7 @@ function App() {
           <Route path="/users/profile" element={<MyProfile />}></Route>
           <Route path="users/login" element={<Login />}></Route>
           <Route path="users/register" element={<Register />}></Route>
+          <Route path="users/logout" element={<Logout />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
         <Footer />
