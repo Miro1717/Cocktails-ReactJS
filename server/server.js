@@ -1675,7 +1675,7 @@
       "a458e072-0fd1-4df7-86c7-ee40aa2740c8": {
         _ownerId: "35c62d76-8152-4626-8712-eeb96381bea8",
         cocktailName: "Manhattan Transfer",
-        AlcoholType: "Rum Cocktail",
+        alcoholType: "Rum Cocktail",
         imageUrl:
           "https://media.wired.com/photos/593261cab8eb31692072f129/master/w_2560%2Cc_limit/85120553.jpg",
         description: "456",
@@ -1685,7 +1685,7 @@
       "e0d5eb44-9e5c-40aa-a521-cff4bf76ef2e": {
         _ownerId: "35c62d76-8152-4626-8712-eeb96381bea8",
         cocktailName: "Manhattan Transfer",
-        AlcoholType: "Whisky Cocktail",
+        alcoholType: "Whisky Cocktail",
         imageUrl:
           "https://www.liquor.com/thmb/e3YypkUO9NN7L2NJMhqHNFrvV7s=/750x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/manhattan-transfer-4000x4000-primary-ig-5acbc04f52a243d8b152da3b71a8245f.jpg",
         description: "lihiugiug",

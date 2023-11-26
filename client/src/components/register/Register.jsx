@@ -2,12 +2,12 @@ import { Link } from "react-router-dom";
 import { useContext } from "react";
 import AuthContext from "../../context/authContext";
 import useForm from "../../hooks/useForm";
-import "./register.module.css"
 
 const RegisterFormKeys = {
   Email: "email",
   Password: "password",
   RePassword: "rePassword",
+  Username: "Username",
 };
 
 const Register = function () {
@@ -16,45 +16,68 @@ const Register = function () {
     [RegisterFormKeys.Email]: "",
     [RegisterFormKeys.Password]: "",
     [RegisterFormKeys.RePassword]: "",
+    [RegisterFormKeys.Username]: "",
   });
 
   return (
-    <form className="form">
-    <p className="title">Register </p>
-    <p className="message">Signup now and get full access to our app. </p>
-        <div className="flex">
-        <label>
-            <input required="" placeholder="" type="text" className="input"/>
-            <span>Firstname</span>
-        </label>
+    <form className="form-login" id="login" onSubmit={onSubmit}>
+      <p className="form-title">Sign up to your account</p>
+      <div className="input-container">
+        <input
+          type="text"
+          id="email"
+          placeholder="Enter email"
+          name="email"
+          onChange={onChange}
+          value={values[RegisterFormKeys.Email]}
+        />
+        <span></span>
+      </div>
+      <div className="input-container">
+        <input
+          type="password"
+          id="password"
+          placeholder="Enter password"
+          name="password"
+          onChange={onChange}
+          value={values[RegisterFormKeys.Password]}
+        />
+      </div>
+      <div className="input-container">
+        <input
+          type="password"
+          id="rePassword"
+          name="rePassword"
+          placeholder="Enter repeat password"
+          onChange={onChange}
+          value={values[RegisterFormKeys.RePassword]}
+        />
+      </div>
+      <div className="input-container">
+        <input
+          type="text"
+          id="register-username"
+          placeholder="Enter username"
+          name={RegisterFormKeys.Username}
+          onChange={onChange}
+          value={values[RegisterFormKeys.Username]}
+        />
+      </div>
+      <button type="submit" className="submit">
+        Sign up
+      </button>
 
-        <label>
-            <input required="" placeholder="" type="text" className="input"/>
-            <span>Lastname</span>
-        </label>
-    </div>  
-            
-    <label>
-        <input required="" placeholder="" type="email" className="input"/>
-        <span>Email</span>
-    </label> 
-        
-    <label>
-        <input required="" placeholder="" type="password" className="input"/>
-        <span>Password</span>
-    </label>
-    <label>
-        <input required="" placeholder="" type="password" className="input"/>
-        <span>Confirm password</span>
-    </label>
-    <button className="submit">Submit</button>
-    <p className="signin">Already have an acount ? <a href="#">Signin</a> </p>
-</form>
+      <p className="signup-link">
+        Already have an acount ?<Link to="/users/login"> Sing in</Link>
+      </p>
+    </form>
   );
 };
 
 export default Register;
-{/* <Link to="/users/login">here</Link>
+{
+  /* <Link to="/users/login">here</Link>
  name={[RegisterFormKeys.RePassword]}
  onChange={onChange}
- value={values[RegisterFormKeys.RePassword]} */}
+ value={values[RegisterFormKeys.RePassword]} */
+}

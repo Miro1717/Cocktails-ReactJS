@@ -1,6 +1,7 @@
 import * as cocktailServices from "../../services/cocktail/cocktailServices";
 import CocktailsItem from "./CocktailItem";
 import { useState, useEffect } from "react";
+import "./cocktailItem.css";
 
 const CocktailCatalog = function () {
   const [cocktails, setCocktails] = useState([]);
@@ -22,10 +23,18 @@ const CocktailCatalog = function () {
         <CocktailsItem key={cocktail._id} {...cocktail} />
       ))}
 
-      {cocktails.length === 0 && <h3  style={{color: "white",
-  position: "absolute",
-  top: "80px",
-  right: "50%"}}>No cocktails to views</h3>}
+      {cocktails.length === 0 && (
+        <h3
+          style={{
+            color: "white",
+            position: "absolute",
+            top: "80px",
+            right: "50%",
+          }}
+        >
+          No cocktails to views
+        </h3>
+      )}
     </div>
   );
 };

@@ -43,7 +43,7 @@ const CocktailCreate = function () {
       <Form.Select
         aria-label="Default select example"
         style={{ marginTop: "10px" }}
-        name="AlcoholType"
+        name="alcoholType"
       >
         <option>Gin Cocktail</option>
         <option>Rum Cocktail</option>
