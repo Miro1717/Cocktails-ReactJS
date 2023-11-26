@@ -1,10 +1,8 @@
 import { Link } from "react-router-dom";
-import FloatingLabel from "react-bootstrap/FloatingLabel";
-import Form from "react-bootstrap/Form";
-import Button from "react-bootstrap/Button";
 import { useContext } from "react";
 import AuthContext from "../../context/authContext";
 import useForm from "../../hooks/useForm";
+import "./register.module.css"
 
 const RegisterFormKeys = {
   Email: "email",
@@ -21,85 +19,42 @@ const Register = function () {
   });
 
   return (
-    <form
-      onSubmit={onSubmit}
-      style={{
-        position: "absolute",
-        top: "300px",
-        left: "50%",
-        transform: "translate(-50%, -50%)",
-        padding: "10px",
-      }}
-    >
-      <FloatingLabel
-        controlId="floatingInputRegisterEmail"
-        label="Email address"
-        className="mb-3"
-      >
-        <Form.Control
-          type="email"
-          placeholder="name@example.com"
-          onChange={onChange}
-          name={[RegisterFormKeys.Email]}
-          value={values[RegisterFormKeys.Email]}
-          style={{ marginTop: "10px" }}
-        />
-      </FloatingLabel>
-      <FloatingLabel
-        controlId="floatingPassword"
-        label="Password"
-        style={{ marginTop: "10px" }}
-      >
-        <Form.Control
-          type="password"
-          placeholder="Password"
-          name={[RegisterFormKeys.Password]}
-          onChange={onChange}
-          value={values[RegisterFormKeys.Password]}
-        />
-      </FloatingLabel>
-      <FloatingLabel
-        controlId="floatingRePassword"
-        label="rePassword"
-        style={{ marginTop: "10px" }}
-      >
-        <Form.Control
-          type="password"
-          placeholder="Password"
-          name={[RegisterFormKeys.RePassword]}
-          onChange={onChange}
-          value={values[RegisterFormKeys.RePassword]}
-        />
-      </FloatingLabel>
-      <FloatingLabel
-        controlId="floatingInputFirstName"
-        label="First name"
-        style={{ marginTop: "10px" }}
-      >
-        <Form.Control type="text" placeholder="John" />
-      </FloatingLabel>
-      <FloatingLabel
-        controlId="floatingInputLastName"
-        label="Last name"
-        style={{ marginTop: "10px" }}
-      >
-        <Form.Control type="text" placeholder="Doe" />
-      </FloatingLabel>
+    <form className="form">
+    <p className="title">Register </p>
+    <p className="message">Signup now and get full access to our app. </p>
+        <div className="flex">
+        <label>
+            <input required="" placeholder="" type="text" className="input"/>
+            <span>Firstname</span>
+        </label>
 
-      <Button
-        variant="secondary"
-        type="submit"
-        style={{ margin: "10px 140px" }}
-      >
-        Register
-      </Button>
-      <p style={{ color: "white", margin: "20px" }}>
-        <span>
-          If you already have profile click <Link to="/users/login">here</Link>
-        </span>
-      </p>
-    </form>
+        <label>
+            <input required="" placeholder="" type="text" className="input"/>
+            <span>Lastname</span>
+        </label>
+    </div>  
+            
+    <label>
+        <input required="" placeholder="" type="email" className="input"/>
+        <span>Email</span>
+    </label> 
+        
+    <label>
+        <input required="" placeholder="" type="password" className="input"/>
+        <span>Password</span>
+    </label>
+    <label>
+        <input required="" placeholder="" type="password" className="input"/>
+        <span>Confirm password</span>
+    </label>
+    <button className="submit">Submit</button>
+    <p className="signin">Already have an acount ? <a href="#">Signin</a> </p>
+</form>
   );
 };
 
 export default Register;
+{/* <Link to="/users/login">here</Link>
+ name={[RegisterFormKeys.RePassword]}
+ onChange={onChange}
+ value={values[RegisterFormKeys.RePassword]} */}

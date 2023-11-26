@@ -1,20 +1,33 @@
-import Button from "react-bootstrap/Button";
-import Card from "react-bootstrap/Card";
+import './cocktailItem.css'
 import { Link } from "react-router-dom";
 
 const CocktailsItem = function ({ _id, cocktailName, AlcoholType, imageUrl }) {
   return (
-    <Card style={{ width: "18rem", margin: "15px" }}>
-      <Card.Img variant="top" src={imageUrl} />
-      <Card.Body>
-        <Card.Title>{cocktailName}</Card.Title>
-        <Card.Text>{AlcoholType}</Card.Text>
-        <Button>
-          <Link to={`/cocktails/${_id}`}>Details</Link>
-        </Button>
-      </Card.Body>
-    </Card>
+    <div class="card">
+    <img class="image" src={imageUrl}/>
+     <div class="content">
+       <a href="#">
+         <span class="title">
+           {cocktailName}
+         </span>
+       </a>
+   
+       <p class="desc">
+       {AlcoholType}
+       </p>
+   
+       <Link class="action" to={`/cocktails/${_id}`}>
+         Details
+         <span aria-hidden="true">
+           →
+         </span>
+       </Link>
+     </div>
+   </div>
+        
+  
   );
 };
 
 export default CocktailsItem;
+
