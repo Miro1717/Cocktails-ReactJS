@@ -44,12 +44,14 @@
     padding-bottom: 0.75rem;
     padding-left: 1.25rem;
     padding-right: 1.25rem;
-    background-color: #676586;
+    background-color: #525252;
     color: #ffffff;
     font-size: 0.875rem;
     line-height: 1.25rem;
     font-weight: 500;
-    width: 100%;
+    width: 200px;
+    margin-left: auto;
+    margin-right: auto;
     border-radius: 0.5rem;
     text-transform: uppercase;
   }

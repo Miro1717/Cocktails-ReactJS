@@ -22,7 +22,6 @@ const Login = function () {
       <label className="input-container">
         <input
           type="email"
-          id="email"
           placeholder="Enter email"
           name={LoginFromKeys.Email}
           onChange={onChange}
@@ -32,7 +31,6 @@ const Login = function () {
       <label className="input-container">
         <input
           type="password"
-          id="password"
           placeholder="Enter password"
           name={LoginFromKeys.Password}
           onChange={onChange}

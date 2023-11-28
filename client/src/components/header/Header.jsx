@@ -1,78 +1,50 @@
 import { Link } from "react-router-dom";
-import Container from "react-bootstrap/Container";
-import Nav from "react-bootstrap/Nav";
-import Navbar from "react-bootstrap/Navbar";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import AuthContext from "../../context/authContext";
+import "./Header.css";
 
 const Header = function () {
-  const { isAuthenticated, username } = useContext(AuthContext);
+  const { isAuthenticated } = useContext(AuthContext);
 
   return (
-    <>
-      <Navbar bg="dark" data-bs-theme="dark">
-        <Container>
-          <Navbar.Brand as={Link} to="/">
-            Home
-          </Navbar.Brand>
-          <Nav className="me-auto">
-            <Nav.Link as={Link} to="/cocktails/catalog">
-              Catalog
-            </Nav.Link>
-            {isAuthenticated && (
-              <>
-                <Nav.Link as={Link} to="/cocktails/create">
-                  Create Cocktails
-                </Nav.Link>
-                <Nav.Link as={Link} to="/users/profile">
-                  Profile
-                </Nav.Link>
-                <Nav.Link as={Link} to="/users/logout">
-                  Logout
-                </Nav.Link>
-              </>
-            )}
+    <nav>
+      <input type="checkbox" id="check" />
+      <label htmlFor="check" className="checkbtn">
+        <i className="fas fa-bars"></i>
+      </label>
+      <label className="logo">Cocktails</label>
+      <ul>
+        <li>
+          <Link to="/">Home</Link>
+        </li>
+        <li>
+          <Link to="cocktails/catalog">Catalog</Link>
+        </li>
 
-            {!isAuthenticated && (
-              <>
-                <Nav.Link as={Link} to="/users/login">
-                  Login
-                </Nav.Link>
-                <Nav.Link as={Link} to="/users/register">
-                  Register
-                </Nav.Link>
-              </>
-            )}
-          </Nav>
-        </Container>
-      </Navbar>
+        {!isAuthenticated && (
+          <>
+            <li>
+              <Link to="/users/login">Login</Link>
+            </li>
+            <li>
+              <Link to="/users/register">Register</Link>
+            </li>
+          </>
+        )}
 
-      {/* <nav>
-       <ul className="menu">
-         <li>
-           <Link to="/">Home</Link>
-         </li>
-         <li>
-           <Link to="/cocktails/catalog">Catalog</Link>
-         </li>
-         <li>
-           <Link to="/cocktails/create">Create Cocktails</Link>
-         </li>
-         <li>
-           <Link to="/users/profile">Profile</Link>
-         </li>
-         <li>
-           <Link to="/users/logout">Logout</Link>
-         </li>
-         <li>
-           <Link to="/users/register">Register</Link>
-         </li>
-         <li>
-           <Link to="/users/login">Login</Link>
-         </li>
-       </ul>
-     </nav>  */}
-    </>
+        {isAuthenticated && (
+          <>
+            <li>
+              <Link to="/users/profile">My Cocktails</Link>
+            </li>
+
+            <li>
+              <Link to="/users/logout">Logout</Link>
+            </li>
+          </>
+        )}
+      </ul>
+    </nav>
   );
 };
 
