@@ -8,6 +8,12 @@ export const getAll = async () => {
   return result;
 };
 
+export const getLastCocktails = async () => {
+  const result = await request.get(`${baseUrl}?sortBy=_createdOn%20desc`);
+
+  return result;
+};
+
 export const getOne = async (cocktailId) => {
   const result = await request.get(`${baseUrl}/${cocktailId}`);
 

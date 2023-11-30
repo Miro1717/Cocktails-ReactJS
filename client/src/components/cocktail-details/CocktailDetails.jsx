@@ -10,10 +10,7 @@ const CocktailDetails = function () {
 
   useEffect(() => {
     getOne(id)
-      .then((data) => {
-        setCocktail(data);
-        console.log(data);
-      })
+      .then((data) => setCocktail(data))
       .catch((err) => console.log(err));
   }, [id]);
 
@@ -35,7 +32,7 @@ const CocktailDetails = function () {
       </h3>
 
       <div id="action-buttons">
-        <a href="" id="edit-btn">
+        <a href={`/cocktails/edit/${id}`} id="edit-btn">
           Edit
         </a>
         <a href="" id="delete-btn">

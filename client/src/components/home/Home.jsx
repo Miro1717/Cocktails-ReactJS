@@ -1,20 +1,46 @@
-import Card from "react-bootstrap/Card";
+import * as cocktailServices from "../../services/cocktail/cocktailServices";
+import CocktailsItem from "../cocktail-catalog/CocktailItem";
+import { useState, useEffect } from "react";
 
 const Home = function () {
+  const [cocktails, setCocktails] = useState([]);
+
+  useEffect(() => {
+    cocktailServices.getLastCocktails().then((result) => {
+      if (result.length > 3) {
+        result = result.splice(0, 3);
+      }
+      setCocktails(result);
+    });
+  }, []);
   return (
     <>
-      <h1 style={{ color: "white", textAlign: "center" }}>Top 3 Cocktails</h1>
-      <div>
-        <Card style={{ width: "18rem" }}>
-          <Card.Img
-            variant="top"
-            src="https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8Y29ja3RhaWx8ZW58MHx8MHx8fDA%3D"
-          />
-          <Card.Body>
-            <Card.Title>Cocktail Name</Card.Title>
-            <Card.Text>Rum Cocktail</Card.Text>
-          </Card.Body>
-        </Card>
+      <h1 style={{ color: "white", textAlign: "center" }}>Last Cocktails</h1>
+
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "row",
+          flexWrap: "wrap",
+          margin: "10px",
+        }}
+      >
+        {cocktails.map((cocktail) => (
+          <CocktailsItem key={cocktail._id} {...cocktail} />
+        ))}
+
+        {cocktails.length === 0 && (
+          <h3
+            style={{
+              color: "white",
+              position: "absolute",
+              top: "80px",
+              right: "50%",
+            }}
+          >
+            No cocktails to views
+          </h3>
+        )}
       </div>
     </>
   );

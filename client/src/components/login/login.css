@@ -21,13 +21,13 @@
     position: relative;
   }
   
-  .input-container input, .form button {
+  .input-container input, textarea, .form button {
     outline: none;
     border: 1px solid #e5e7eb;
     margin: 8px 0;
   }
   
-  .input-container input {
+  .input-container input, textarea{
     background-color: #9c9c9c;
     padding: 1rem;
     padding-right: 3rem;

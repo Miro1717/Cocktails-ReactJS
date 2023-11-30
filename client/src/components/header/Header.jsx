@@ -35,6 +35,9 @@ const Header = function () {
         {isAuthenticated && (
           <>
             <li>
+              <Link to="/cocktails/create">Create</Link>
+            </li>
+            <li>
               <Link to="/users/profile">My Cocktails</Link>
             </li>
 
