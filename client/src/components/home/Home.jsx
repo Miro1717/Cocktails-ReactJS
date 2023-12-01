@@ -15,7 +15,7 @@ const Home = function () {
   }, []);
   return (
     <>
-      <h1 style={{ color: "white", textAlign: "center" }}>Last Cocktails</h1>
+      <h1 style={{ color: "white", textAlign: "center" }}>Last 3 Cocktails</h1>
 
       <div
         style={{

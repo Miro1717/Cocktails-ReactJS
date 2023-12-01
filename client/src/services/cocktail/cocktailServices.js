@@ -14,6 +14,14 @@ export const getLastCocktails = async () => {
   return result;
 };
 
+export const getOwnerCocktails = async (userId) => {
+  const result = await request.get(
+    `${baseUrl}?where=_ownerId%3D%22${userId}%22`
+  );
+
+  return result;
+};
+
 export const getOne = async (cocktailId) => {
   const result = await request.get(`${baseUrl}/${cocktailId}`);
 

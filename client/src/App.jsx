@@ -14,6 +14,7 @@ import NotFound from "./components/not-found/NotFound";
 import Details from "./components/cocktail-details/CocktailDetails";
 import Edit from "./components/cocktail-edit/CocktailEdit";
 import Logout from "./components/logout/Logout";
+import { RouteGuard } from "./components/guards/AuthGuard";
 
 function App() {
   return (
@@ -22,13 +23,18 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/cocktails/catalog" element={<Catalog />}></Route>
-        <Route path="/cocktails/create" element={<Create />}></Route>
-        <Route path="/cocktails/edit/:id" element={<Edit />}></Route>
         <Route path="/cocktails/:id" element={<Details />}></Route>
-        <Route path="/users/profile" element={<MyProfile />}></Route>
+
         <Route path="users/login" element={<Login />}></Route>
         <Route path="users/register" element={<Register />}></Route>
         <Route path="users/logout" element={<Logout />} />
+
+        <Route element={<RouteGuard />}>
+          <Route path="/cocktails/create" element={<Create />}></Route>
+          <Route path="/cocktails/edit/:id" element={<Edit />}></Route>
+          <Route path="/users/profile" element={<MyProfile />}></Route>
+        </Route>
+
         <Route path="*" element={<NotFound />} />
       </Routes>
       <Footer />

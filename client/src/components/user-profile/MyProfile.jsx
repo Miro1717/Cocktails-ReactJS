@@ -1,26 +1,47 @@
-import Button from "react-bootstrap/Button";
-import Card from "react-bootstrap/Card";
+import AuthContext from "../../context/authContext";
+import { useContext, useState, useEffect } from "react";
+import { getOwnerCocktails } from "../../services/cocktail/cocktailServices";
+import CocktailsItem from "../cocktail-catalog/CocktailItem";
 
 const MyProfile = function () {
+  const [cocktails, setCocktails] = useState([]);
+  const { userId } = useContext(AuthContext);
+
+  useEffect(() => {
+    getOwnerCocktails(userId).then((result) => setCocktails(result));
+  }, []);
+
+  console.log(cocktails);
   return (
-    <div>
-      <Card style={{ width: "18rem" }}>
-        <Card.Img
-          variant="top"
-          src="https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8Y29ja3RhaWx8ZW58MHx8MHx8fDA%3D"
-        />
-        <Card.Body>
-          <Card.Title>Cocktail Name</Card.Title>
-          <Card.Text>Rum Cocktail</Card.Text>
-          <Button variant="primary" style={{ margin: "10px" }}>
-            Edit
-          </Button>
-          <Button variant="primary" style={{ margin: "10px" }}>
-            Delete
-          </Button>
-        </Card.Body>
-      </Card>
-    </div>
+    <>
+      <h1 style={{ color: "white", textAlign: "center" }}>My Cocktails:</h1>
+
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "row",
+          flexWrap: "wrap",
+          margin: "10px",
+        }}
+      >
+        {cocktails.map((cocktail) => (
+          <CocktailsItem key={cocktail._id} {...cocktail} />
+        ))}
+
+        {cocktails.length === 0 && (
+          <h3
+            style={{
+              color: "white",
+              position: "absolute",
+              top: "80px",
+              right: "50%",
+            }}
+          >
+            No cocktails to views
+          </h3>
+        )}
+      </div>
+    </>
   );
 };
 
