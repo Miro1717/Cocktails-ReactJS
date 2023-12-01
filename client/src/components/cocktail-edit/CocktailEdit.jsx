@@ -5,20 +5,19 @@ import { useEffect, useState } from "react";
 
 const CocktailEdit = function () {
   const navigate = useNavigate();
-  const { cocktailId } = useParams();
+  const { id } = useParams();
   const [cocktail, setCocktail] = useState({
-    title: "",
-    category: "",
-    maxLevel: "",
+    cocktailName: "",
+    alcoholType: "",
+    description: "",
     imageUrl: "",
-    summary: "",
   });
 
   useEffect(() => {
-    cocktailServices.getOne(cocktailId).then((result) => {
+    cocktailServices.getOne(id).then((result) => {
       setCocktail(result);
     });
-  }, [cocktailId]);
+  }, [id]);
 
   const editCocktailSubmitHandler = async (e) => {
     e.preventDefault();
@@ -26,9 +25,9 @@ const CocktailEdit = function () {
     const values = Object.fromEntries(new FormData(e.currentTarget));
 
     try {
-      await cocktailServices.edit(cocktailId, values);
+      await cocktailServices.edit(id, values);
 
-      navigate("/catalog");
+      navigate(`/cocktails/${id}`);
     } catch (err) {
       // Error notification
       console.log(err);
@@ -43,59 +42,62 @@ const CocktailEdit = function () {
   };
 
   return (
-    <form id="create" onSubmit={editCocktailSubmitHandler}>
-      <div className="container">
-        <h1>Create Game</h1>
-        <label htmlFor="leg-title">Legendary title:</label>
+    <form
+      className="form-login"
+      id="login"
+      onSubmit={editCocktailSubmitHandler}
+    >
+      <p className="form-title">Edit</p>
+      <div className="input-container">
         <input
           type="text"
-          id="title"
-          name="title"
-          value={cocktail.title}
+          id="cocktailName"
+          placeholder="Cocktail Name"
+          name="cocktailName"
+          value={cocktail.cocktailName}
           onChange={onChange}
-          placeholder="Enter game title..."
         />
-
-        <label htmlFor="category">Category:</label>
-        <input
-          type="text"
-          id="category"
-          name="category"
-          value={cocktail.category}
+        <span></span>
+      </div>
+      <div className="input-container">
+        <select
+          id="alcoholType"
+          name="alcoholType"
+          value={cocktail.alcoholType}
           onChange={onChange}
-          placeholder="Enter game category..."
-        />
-
-        <label htmlFor="levels">MaxLevel:</label>
+        >
+          <option>Gin Cocktail</option>
+          <option>Rum Cocktail</option>
+          <option>Vodka Cocktail</option>
+          <option>Whisky Cocktail</option>
+          <option>Tequila Cocktail</option>
+          <option>Non-Alcohol Cocktail</option>
+        </select>
+      </div>
+      <div className="input-container">
         <input
-          type="number"
-          id="maxLevel"
-          name="maxLevel"
-          value={cocktail.maxLevel}
-          onChange={onChange}
-          min="1"
-          placeholder="1"
-        />
-
-        <label htmlFor="game-img">Image:</label>
-        <input
-          type="text"
+          type="imageUrl"
           id="imageUrl"
           name="imageUrl"
+          placeholder="Image Url"
           value={cocktail.imageUrl}
           onChange={onChange}
-          placeholder="Upload a photo..."
         />
-
-        <label htmlFor="summary">Summary:</label>
-        <textarea
-          name="summary"
-          value={cocktail.summary}
-          onChange={onChange}
-          id="summary"
-        ></textarea>
-        <input className="btn submit" type="submit" value="Edit Game" />
       </div>
+      <div className="input-container">
+        <textarea
+          rows={7}
+          type="text"
+          id="description"
+          name="description"
+          placeholder="Description"
+          value={cocktail.description}
+          onChange={onChange}
+        />
+      </div>
+      <button type="submit" className="submit">
+        Edit
+      </button>
     </form>
   );
 };

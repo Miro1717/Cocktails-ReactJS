@@ -11,31 +11,35 @@ const CocktailCatalog = function () {
   }, []);
 
   return (
-    <div
-      style={{
-        display: "flex",
-        flexDirection: "row",
-        flexWrap: "wrap",
-        margin: "10px",
-      }}
-    >
-      {cocktails.map((cocktail) => (
-        <CocktailsItem key={cocktail._id} {...cocktail} />
-      ))}
+    <>
+      <h1 style={{ color: "white", textAlign: "center" }}>Catalog</h1>
 
-      {cocktails.length === 0 && (
-        <h3
-          style={{
-            color: "white",
-            position: "absolute",
-            top: "80px",
-            right: "50%",
-          }}
-        >
-          No cocktails to views
-        </h3>
-      )}
-    </div>
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "row",
+          flexWrap: "wrap",
+          margin: "10px",
+        }}
+      >
+        {cocktails.map((cocktail) => (
+          <CocktailsItem key={cocktail._id} {...cocktail} />
+        ))}
+
+        {cocktails.length === 0 && (
+          <h3
+            style={{
+              color: "white",
+              position: "absolute",
+              top: "80px",
+              right: "50%",
+            }}
+          >
+            No cocktails to views
+          </h3>
+        )}
+      </div>
+    </>
   );
 };
 

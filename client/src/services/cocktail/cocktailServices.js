@@ -25,3 +25,12 @@ export const create = async (cocktailData) => {
 
   return result;
 };
+
+export const edit = async (cocktailId, cocktailData) => {
+  const result = await request.put(`${baseUrl}/${cocktailId}`, cocktailData);
+
+  return result;
+};
+
+export const remove = async (cocktailId) =>
+  request.remove(`${baseUrl}/${cocktailId}`);

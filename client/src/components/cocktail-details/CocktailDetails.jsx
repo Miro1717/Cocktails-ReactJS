@@ -1,18 +1,35 @@
-import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-import { getOne } from "../../services/cocktail/cocktailServices";
+import { useContext, useEffect, useState } from "react";
+import { useParams, useNavigate } from "react-router-dom";
+import { getOne, remove } from "../../services/cocktail/cocktailServices";
+import AuthContext from "../../context/authContext";
 import "./details.css";
 
 const CocktailDetails = function () {
+  const navigate = useNavigate();
   const { id } = useParams();
+  const { userId, isAuthenticated } = useContext(AuthContext);
 
-  const [cocktail, setCocktail] = useState("");
+  const [cocktail, setCocktail] = useState({});
 
   useEffect(() => {
     getOne(id)
       .then((data) => setCocktail(data))
       .catch((err) => console.log(err));
   }, [id]);
+
+  const deleteButtonClickHandler = async () => {
+    const hasConfirmed = confirm(
+      `Are you sure you want to delete ${cocktail.cocktailName}`
+    );
+
+    if (hasConfirmed) {
+      await remove(id);
+
+      navigate("/cocktails/catalog");
+    }
+  };
+
+  const isOwner = userId === cocktail._ownerId;
 
   return (
     <div id="details-wrapper">
@@ -31,18 +48,24 @@ const CocktailDetails = function () {
         Likes: <span id="go">0</span>
       </h3>
 
-      <div id="action-buttons">
-        <a href={`/cocktails/edit/${id}`} id="edit-btn">
-          Edit
-        </a>
-        <a href="" id="delete-btn">
-          Delete
-        </a>
+      {isOwner && (
+        <div id="action-buttons">
+          <a href={`/cocktails/edit/${id}`} id="edit-btn">
+            Edit
+          </a>
+          <a id="delete-btn" onClick={deleteButtonClickHandler}>
+            Delete
+          </a>
+        </div>
+      )}
 
-        <a href="" id="go-btn">
-          Likes
-        </a>
-      </div>
+      {isAuthenticated && !isOwner && (
+        <div id="action-buttons">
+          <a href="" id="go-btn">
+            Likes
+          </a>
+        </div>
+      )}
     </div>
   );
 };
