@@ -1,13 +1,18 @@
-import { useContext, useEffect, useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useContext, useEffect, useState, useReducer, useMemo } from "react";
+import { useParams, useNavigate, Link } from "react-router-dom";
+
+import * as commentServices from "../../services/cocktail/commentServices";
 import { getOne, remove } from "../../services/cocktail/cocktailServices";
 import AuthContext from "../../context/authContext";
+import reducer from "./reducer";
+import useForm from "../../hooks/useForm";
 import "./details.css";
 
 const CocktailDetails = function () {
   const navigate = useNavigate();
   const { id } = useParams();
-  const { userId, isAuthenticated } = useContext(AuthContext);
+  const { userId, isAuthenticated, email } = useContext(AuthContext);
+  const [comments, dispatch] = useReducer(reducer, []);
 
   const [cocktail, setCocktail] = useState({});
 
@@ -15,7 +20,25 @@ const CocktailDetails = function () {
     getOne(id)
       .then((data) => setCocktail(data))
       .catch((err) => console.log(err));
+
+    commentServices.getAll(id).then((result) => {
+      dispatch({
+        type: "GET_ALL_COMMENTS",
+        payload: result,
+      });
+    });
   }, [id]);
+
+  const addCommentHandler = async (values) => {
+    const newComment = await commentServices.create(id, values.comment);
+
+    newComment.owner = { email };
+
+    dispatch({
+      type: "ADD_COMMENT",
+      payload: newComment,
+    });
+  };
 
   const deleteButtonClickHandler = async () => {
     const hasConfirmed = confirm(
@@ -28,6 +51,10 @@ const CocktailDetails = function () {
       navigate("/cocktails/catalog");
     }
   };
+
+  const { values, onChange, onSubmit } = useForm(addCommentHandler, {
+    comment: "",
+  });
 
   const isOwner = userId === cocktail._ownerId;
 
@@ -65,6 +92,39 @@ const CocktailDetails = function () {
             Likes
           </a>
         </div>
+      )}
+
+      <div className="details-comments">
+        <h2>Comments:</h2>
+        <ul>
+          {comments.map(({ _id, text, owner: { email } }) => (
+            <li
+              style={{ width: "433px", border: "3px", margin: "5px" }}
+              key={_id}
+              className="comment"
+            >
+              <p>
+                {email}: {text}
+              </p>
+            </li>
+          ))}
+        </ul>
+
+        {comments.length === 0 && <p className="no-comment">No comments.</p>}
+      </div>
+      {isAuthenticated && (
+        <article className="create-comment">
+          <label>Add new comment:</label>
+          <form className="form" onSubmit={onSubmit}>
+            <textarea
+              name="comment"
+              value={values.comment}
+              onChange={onChange}
+              placeholder="Comment......"
+            ></textarea>
+            <input className="btn submit" type="submit" value="Add Comment" />
+          </form>
+        </article>
       )}
     </div>
   );

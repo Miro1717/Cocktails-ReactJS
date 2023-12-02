@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 const CocktailsItem = function ({ _id, cocktailName, alcoholType, imageUrl }) {
   return (
     <div className="card">
-      <img className="image" src={imageUrl} />
+      <img className="image" style={{ margin: "5px" }} src={imageUrl} />
       <div className="content">
         <a href="#">
           <span className="title">{cocktailName}</span>
