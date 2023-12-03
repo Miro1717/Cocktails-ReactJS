@@ -17,29 +17,38 @@ import Logout from "./components/logout/Logout";
 import { RouteGuard } from "./components/guards/AuthGuard";
 
 function App() {
-  return (
-    <AuthProvider>
-      <Header />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/cocktails/catalog" element={<Catalog />}></Route>
-        <Route path="/cocktails/:id" element={<Details />}></Route>
+    return (
+        <AuthProvider>
+            <Header />
+            <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/cocktails/catalog" element={<Catalog />}></Route>
+                <Route path="/cocktails/:id" element={<Details />}></Route>
 
-        <Route path="users/login" element={<Login />}></Route>
-        <Route path="users/register" element={<Register />}></Route>
-        <Route path="users/logout" element={<Logout />} />
+                <Route path="users/login" element={<Login />}></Route>
+                <Route path="users/register" element={<Register />}></Route>
+                <Route path="users/logout" element={<Logout />} />
 
-        <Route element={<RouteGuard />}>
-          <Route path="/cocktails/create" element={<Create />}></Route>
-          <Route path="/cocktails/edit/:id" element={<Edit />}></Route>
-          <Route path="/users/profile" element={<MyProfile />}></Route>
-        </Route>
+                <Route element={<RouteGuard />}>
+                    <Route
+                        path="/cocktails/create"
+                        element={<Create />}
+                    ></Route>
+                    <Route
+                        path="/cocktails/edit/:id"
+                        element={<Edit />}
+                    ></Route>
+                    <Route
+                        path="/users/profile"
+                        element={<MyProfile />}
+                    ></Route>
+                </Route>
 
-        <Route path="*" element={<NotFound />} />
-      </Routes>
-      <Footer />
-    </AuthProvider>
-  );
+                <Route path="*" element={<NotFound />} />
+            </Routes>
+            <Footer />
+        </AuthProvider>
+    );
 }
 
 export default App;

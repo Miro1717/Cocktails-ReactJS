@@ -53,9 +53,9 @@ export const AuthProvider = ({ children }) => {
     };
 
     const registerSubmitHandler = async (values) => {
-        const { confirmPassword, ...registerData } = values;
+        const { rePassword, ...registerData } = values;
 
-        if (confirmPassword !== registerData.password) {
+        if (rePassword !== registerData.password) {
             setErrorMessage("Passwords dont match");
             return;
         }
