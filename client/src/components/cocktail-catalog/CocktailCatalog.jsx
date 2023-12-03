@@ -13,9 +13,10 @@ const CocktailCatalog = function () {
         cocktailServices
             .getAll()
             .then((result) => setCocktails(result))
-            .catch((err) => console.log(err));
+            .catch((err) => console.log(err))
+            .finally(setLoading(false));
 
-        setTimeout(setLoading(false), 3000);
+        
     }, []);
 
     return (
