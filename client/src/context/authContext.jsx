@@ -1,4 +1,4 @@
-import { createContext } from "react";
+import { createContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import * as authService from "../services/user/authService";
@@ -8,43 +8,99 @@ import usePersistedState from "../hooks/usePersistedState";
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
-  AuthContext.displayName = "AuthContext";
+    AuthContext.displayName = "AuthContext";
 
-  const navigate = useNavigate();
-  const [auth, setAuth] = usePersistedState("auth", {});
+    const navigate = useNavigate();
+    const [auth, setAuth] = usePersistedState("auth", {});
 
-  const loginSubmitHandler = async (values) => {
-    const result = await authService.login(values.email, values.password);
+    //start
 
-    setAuth(result);
-    localStorage.setItem("accessToken", result.accessToken);
+    const [errorMessage, setErrorMessage] = useState("");
+    const [showErrorMessage, setShowErrorMessage] = useState(false);
 
-    navigate(Path.Home);
-  };
+    const hideErrorBox = () => {
+        setErrorMessage("");
+        setShowErrorMessage("false");
+    };
 
-  const registerSubmitHandler = async (values) => {
-    const result = await authService.register(values.email, values.password);
-    setAuth(result);
-    localStorage.setItem("accessToken", result.accessToken);
-    navigate(Path.Home);
-  };
+    useEffect(() => {
+        if (errorMessage !== "") {
+            setShowErrorMessage(true);
+        }
+    }, [errorMessage]);
 
-  const logoutHandler = () => {
-    setAuth({});
-    localStorage.removeItem("accessToken");
-  };
+    //stop
 
-  const values = {
-    loginSubmitHandler,
-    registerSubmitHandler,
-    logoutHandler,
-    username: auth.username || auth.email,
-    email: auth.email,
-    userId: auth._id,
-    isAuthenticated: !!auth.accessToken,
-  };
+    const loginSubmitHandler = async (values) => {
+        try {
+            const result = await authService.login(
+                values.email,
+                values.password
+            );
 
-  return <AuthContext.Provider value={values}>{children}</AuthContext.Provider>;
+            setAuth(result);
+            localStorage.setItem("accessToken", result.accessToken);
+
+            navigate(Path.Home);
+        } catch (error) {
+            setErrorMessage(error.message);
+        }
+    };
+
+    const isEmailValid = (email) => {
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return emailRegex.test(email);
+    };
+
+    const registerSubmitHandler = async (values) => {
+        const { confirmPassword, ...registerData } = values;
+
+        if (confirmPassword !== registerData.password) {
+            setErrorMessage("Passwords dont match");
+            return;
+        }
+
+        if (!isEmailValid(registerData.email)) {
+            setErrorMessage(
+                "Invalid email address. Please enter a valid email."
+            );
+            return;
+        }
+
+        try {
+            const result = await authService.register(
+                values.email,
+                values.password
+            );
+            setAuth(result);
+            localStorage.setItem("accessToken", result.accessToken);
+            navigate(Path.Home);
+        } catch (error) {
+            setErrorMessage(error.message);
+        }
+    };
+
+    const logoutHandler = () => {
+        setAuth({});
+        localStorage.removeItem("accessToken");
+    };
+
+    const values = {
+        loginSubmitHandler,
+        registerSubmitHandler,
+        logoutHandler,
+        hideErrorBox,
+        errorMessage,
+        showErrorMessage,
+        username: auth.username || auth.email,
+        email: auth.email,
+        userId: auth._id,
+        isAuthenticated: !!auth.accessToken,
+    };
+
+    return (
+        <AuthContext.Provider value={values}>{children}</AuthContext.Provider>
+    );
 };
 
 export default AuthContext;

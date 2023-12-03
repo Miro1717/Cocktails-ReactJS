@@ -9,6 +9,8 @@ const CocktailCatalog = function () {
     const [cocktails, setCocktails] = useState([]);
     const [loading, setLoading] = useState(true);
 
+    
+
     useEffect(() => {
         cocktailServices
             .getAll()
