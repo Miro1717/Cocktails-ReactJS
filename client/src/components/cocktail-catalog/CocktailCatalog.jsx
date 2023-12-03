@@ -1,13 +1,24 @@
 import * as cocktailServices from "../../services/cocktail/cocktailServices";
 import CocktailsItem from "./CocktailItem";
 import { useState, useEffect } from "react";
+import { Oval } from "react-loader-spinner";
+
 import "./cocktailItem.css";
 
 const CocktailCatalog = function () {
   const [cocktails, setCocktails] = useState([]);
+  const [loading, setLoading] = useState(false);
+
 
   useEffect(() => {
-    cocktailServices.getAll().then((result) => setCocktails(result));
+    try {
+      setLoading(true)
+      cocktailServices.getAll().then((result) => setCocktails(result));
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setLoading(false)
+    }
   }, []);
 
   return (
@@ -22,6 +33,31 @@ const CocktailCatalog = function () {
           margin: "10px",
         }}
       >
+
+      {loading 
+      ? (
+        <Oval
+        height={80}
+        width={80}
+        color="#4fa94d"
+        wrapperStyle={{}}
+        wrapperClass=""
+        visible={true}
+        ariaLabel='oval-loading'
+        secondaryColor="#4fa94d"
+        strokeWidth={2}
+        strokeWidthSecondary={2}
+      
+      />)
+    : (
+
+      cocktails.map((cocktail) => (
+        <CocktailsItem key={cocktail._id} {...cocktail} />
+      ))
+    )}
+
+
+
         {cocktails.map((cocktail) => (
           <CocktailsItem key={cocktail._id} {...cocktail} />
         ))}
