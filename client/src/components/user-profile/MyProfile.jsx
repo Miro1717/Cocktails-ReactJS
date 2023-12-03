@@ -4,45 +4,47 @@ import { getOwnerCocktails } from "../../services/cocktail/cocktailServices";
 import CocktailsItem from "../cocktail-catalog/CocktailItem";
 
 const MyProfile = function () {
-  const [cocktails, setCocktails] = useState([]);
-  const { userId } = useContext(AuthContext);
+    const [cocktails, setCocktails] = useState([]);
+    const { userId } = useContext(AuthContext);
 
-  useEffect(() => {
-    getOwnerCocktails(userId).then((result) => setCocktails(result));
-  }, []);
+    useEffect(() => {
+        getOwnerCocktails(userId).then((result) => setCocktails(result));
+    }, []);
 
-  console.log(cocktails);
-  return (
-    <>
-      <h1 style={{ color: "white", textAlign: "center" }}>My Cocktails:</h1>
+    return (
+        <>
+            <h1 style={{ color: "white", textAlign: "center" }}>
+                My Cocktails:
+            </h1>
 
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "row",
-          flexWrap: "wrap",
-          margin: "10px",
-        }}
-      >
-        {cocktails.map((cocktail) => (
-          <CocktailsItem key={cocktail._id} {...cocktail} />
-        ))}
+            <div
+                style={{
+                    display: "flex",
+                    flexDirection: "row",
+                    flexWrap: "wrap",
+                    margin: "10px",
+                }}
+            >
+                {cocktails.map((cocktail) => (
+                    <CocktailsItem key={cocktail._id} {...cocktail} />
+                ))}
 
-        {cocktails.length === 0 && (
-          <h3
-            style={{
-              color: "white",
-              position: "absolute",
-              top: "80px",
-              right: "50%",
-            }}
-          >
-            No cocktails to views
-          </h3>
-        )}
-      </div>
-    </>
-  );
+                {cocktails.length === 0 && (
+                    <h3
+                        style={{
+                            marginTop: "100px",
+                            color: "white",
+                            position: "absolute",
+                            top: "80px",
+                            right: "50%",
+                        }}
+                    >
+                        No cocktails to views
+                    </h3>
+                )}
+            </div>
+        </>
+    );
 };
 
 export default MyProfile;
