@@ -13,8 +13,6 @@ export const AuthProvider = ({ children }) => {
     const navigate = useNavigate();
     const [auth, setAuth] = usePersistedState("auth", {});
 
-    //start
-
     const [errorMessage, setErrorMessage] = useState("");
     const [showErrorMessage, setShowErrorMessage] = useState(false);
 
@@ -28,8 +26,6 @@ export const AuthProvider = ({ children }) => {
             setShowErrorMessage(true);
         }
     }, [errorMessage]);
-
-    //stop
 
     const loginSubmitHandler = async (values) => {
         try {

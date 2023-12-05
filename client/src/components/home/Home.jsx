@@ -1,11 +1,17 @@
 import * as cocktailServices from "../../services/cocktail/cocktailServices";
 import CocktailsItem from "../cocktail-catalog/CocktailItem";
 import { useState, useEffect } from "react";
+import { RotatingLines } from "react-loader-spinner";
 
 const Home = function () {
     const [cocktails, setCocktails] = useState([]);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
+        setTimeout(() => {
+            setLoading(false);
+        }, 1000);
+
         cocktailServices.getLastCocktails().then((result) => {
             if (result.length > 3) {
                 result = result.splice(0, 3);
@@ -27,11 +33,17 @@ const Home = function () {
                     margin: "10px",
                 }}
             >
-                {cocktails.map((cocktail) => (
-                    <CocktailsItem key={cocktail._id} {...cocktail} />
-                ))}
-
-                {cocktails.length === 0 && (
+                {loading ? (
+                    <div style={{ margin: "auto", marginTop: "100px" }}>
+                        <RotatingLines
+                            strokeColor="grey"
+                            strokeWidth="5"
+                            animationDuration="0.75"
+                            width="96"
+                            visible={true}
+                        />
+                    </div>
+                ) : cocktails.length === 0 ? (
                     <h3
                         style={{
                             marginTop: "100px",
@@ -43,6 +55,10 @@ const Home = function () {
                     >
                         No cocktails to views
                     </h3>
+                ) : (
+                    cocktails.map((cocktail) => (
+                        <CocktailsItem key={cocktail._id} {...cocktail} />
+                    ))
                 )}
             </div>
         </>

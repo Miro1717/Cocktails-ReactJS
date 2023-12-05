@@ -9,16 +9,18 @@ const CocktailCatalog = function () {
     const [cocktails, setCocktails] = useState([]);
     const [loading, setLoading] = useState(true);
 
-    
-
     useEffect(() => {
+        setTimeout(() => {
+            setLoading(false);
+        }, 1000);
+
         cocktailServices
             .getAll()
-            .then((result) => setCocktails(result))
-            .catch((err) => console.log(err))
-            .finally(setLoading(false));
-
-        
+            .then((result) => {
+                setCocktails(result);
+            })
+            .catch((err) => console.log(err));
+        // .finally(setLoading(false));
     }, []);
 
     return (

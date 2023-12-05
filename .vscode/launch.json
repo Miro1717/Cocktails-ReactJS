@@ -7,11 +7,14 @@
         "configurations": [
             
             {
-                "name": "Run Chrome",
-                "request": "launch",
-                "type": "chrome",
-                "url": "http://localhost:5173",
-                "webRoot": "${workspaceFolder}"
+                "preLaunchTask": "task: dev",
+  "name": "chrome",
+  "type": "chrome",
+  "request": "launch",
+  "url": "http://localhost:5173",
+  "enableContentValidation": false,
+  "webRoot": "${workspaceFolder}/src",
+  "pathMapping": {"url": "/src/", "path": "${webRoot}/"}
             },
 
     

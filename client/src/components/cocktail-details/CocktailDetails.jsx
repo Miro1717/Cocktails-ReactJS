@@ -52,6 +52,8 @@ const CocktailDetails = function () {
         }
     };
 
+    const likeButtonClickHandler = async () => {};
+
     const { values, onChange, onSubmit } = useForm(addCommentHandler, {
         comment: "",
     });
@@ -88,7 +90,7 @@ const CocktailDetails = function () {
 
             {isAuthenticated && !isOwner && (
                 <div id="action-buttons">
-                    <a href="" id="go-btn">
+                    <a id="go-btn" onClick={likeButtonClickHandler}>
                         Likes
                     </a>
                 </div>
