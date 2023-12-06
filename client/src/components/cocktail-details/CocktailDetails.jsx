@@ -93,14 +93,24 @@ const CocktailDetails = function () {
                         <span id="categories">{cocktail.alcoholType}</span>
                     </p>
                     <div id="info-wrapper">
-                        <div id="details-description">
+                        <div
+                            style={{ marginBottom: "15px" }}
+                            id="details-description"
+                        >
                             <span>{cocktail.description}</span>
                         </div>
+                        <ul>
+                            {cocktail.ingredients.split("\n").map((e) => (
+                                <p key={e} style={{ textAlign: "left" }}>
+                                    {e}
+                                </p>
+                            ))}
+                        </ul>
                     </div>
 
-                    <h3>
+                    {/* <h3>
                         Likes: <span id="go">0</span>
-                    </h3>
+                    </h3> */}
 
                     {isOwner && (
                         <div id="action-buttons">

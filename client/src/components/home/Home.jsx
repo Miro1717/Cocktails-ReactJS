@@ -5,25 +5,28 @@ import { RotatingLines } from "react-loader-spinner";
 
 const Home = function () {
     const [cocktails, setCocktails] = useState([]);
-    const [loading, setLoading] = useState(true);
+    const [loading, setLoading] = useState(false);
 
     useEffect(() => {
-        setTimeout(() => {
-            setLoading(false);
-        }, 1000);
+        setLoading(true);
 
-        cocktailServices.getLastCocktails().then((result) => {
-            if (result.length > 3) {
-                result = result.splice(0, 3);
-            }
-            setCocktails(result);
-        });
+        cocktailServices
+            .getLastCocktails()
+            .then((result) => {
+                if (result.length > 3) {
+                    result = result.splice(0, 3);
+                }
+                setCocktails(result);
+            })
+            .catch((err) => console.log(err))
+            .finally(setLoading(false));
     }, []);
     return (
         <>
-            <h1 style={{ color: "white", textAlign: "center" }}>
-                Last 3 Cocktails
-            </h1>
+            <h1 style={{ color: "white", textAlign: "center" }}>Home</h1>
+            <h2 style={{ color: "white", textAlign: "center" }}>
+                Last 3 Cocktails:
+            </h2>
 
             <div
                 style={{
@@ -33,7 +36,7 @@ const Home = function () {
                     margin: "10px",
                 }}
             >
-                {loading ? (
+                {loading && (
                     <div style={{ margin: "auto", marginTop: "100px" }}>
                         <RotatingLines
                             strokeColor="grey"
@@ -43,7 +46,9 @@ const Home = function () {
                             visible={true}
                         />
                     </div>
-                ) : cocktails.length === 0 ? (
+                )}
+
+                {cocktails.length === 0 ? (
                     <h3
                         style={{
                             marginTop: "100px",
