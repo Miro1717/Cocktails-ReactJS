@@ -32,6 +32,7 @@ const CocktailCreate = function () {
                     id="cocktailName"
                     placeholder="Cocktail Name"
                     name="cocktailName"
+                    required
                 />
                 <span></span>
             </div>
@@ -51,6 +52,7 @@ const CocktailCreate = function () {
                     id="imageUrl"
                     name="imageUrl"
                     placeholder="Image Url"
+                    required
                 />
             </div>
             <div className="input-container">
@@ -60,6 +62,7 @@ const CocktailCreate = function () {
                     id="description"
                     name="description"
                     placeholder="Description"
+                    required
                 />
             </div>
             <div className="input-container">
@@ -69,6 +72,7 @@ const CocktailCreate = function () {
                     id="ingredients"
                     name="ingredients"
                     placeholder="Ingredients"
+                    required
                 />
             </div>
             <button type="submit" className="submit">

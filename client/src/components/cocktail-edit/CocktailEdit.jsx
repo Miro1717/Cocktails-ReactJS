@@ -57,6 +57,7 @@ const CocktailEdit = function () {
                     name="cocktailName"
                     value={cocktail.cocktailName}
                     onChange={onChange}
+                    required
                 />
                 <span></span>
             </div>
@@ -66,6 +67,7 @@ const CocktailEdit = function () {
                     name="alcoholType"
                     value={cocktail.alcoholType}
                     onChange={onChange}
+                    required
                 >
                     <option>Gin Cocktail</option>
                     <option>Rum Cocktail</option>
@@ -83,6 +85,7 @@ const CocktailEdit = function () {
                     placeholder="Image Url"
                     value={cocktail.imageUrl}
                     onChange={onChange}
+                    required
                 />
             </div>
             <div className="input-container">
@@ -94,6 +97,7 @@ const CocktailEdit = function () {
                     placeholder="Description"
                     value={cocktail.description}
                     onChange={onChange}
+                    required
                 />
             </div>
             <div className="input-container">
@@ -105,6 +109,7 @@ const CocktailEdit = function () {
                     placeholder="Ingredients"
                     value={cocktail.ingredients}
                     onChange={onChange}
+                    required
                 />
             </div>
             <button type="submit" className="submit">
