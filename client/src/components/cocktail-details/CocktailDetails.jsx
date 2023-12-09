@@ -70,6 +70,7 @@ const CocktailDetails = function () {
 
     return (
         <>
+            <h1 style={{ color: "white", textAlign: "center" }}>Details:</h1>
             {loading ? (
                 <div style={{ margin: "auto", marginTop: "100px" }}>
                     <RotatingLines
@@ -167,6 +168,7 @@ const CocktailDetails = function () {
                                     value={values.comment}
                                     onChange={onChange}
                                     placeholder="Comment......"
+                                    required
                                 ></textarea>
                                 <input
                                     className="btn submit"
