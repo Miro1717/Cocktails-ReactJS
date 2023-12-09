@@ -11,9 +11,9 @@ export const getAll = async (cocktailId) => {
     return result;
 };
 
-export const create = async (gameId, text) => {
+export const create = async (cocktailId, text) => {
     const newComment = await request.post(baseUrl, {
-        gameId,
+        cocktailId,
         text,
     });
 
