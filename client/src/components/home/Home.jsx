@@ -8,8 +8,6 @@ const Home = function () {
     const [loading, setLoading] = useState(false);
 
     useEffect(() => {
-        setLoading(true);
-
         cocktailServices
             .getLastCocktails()
             .then((result) => {
@@ -18,9 +16,16 @@ const Home = function () {
                 }
                 setCocktails(result);
             })
-            .catch((err) => console.log(err))
-            .finally(setLoading(false));
+            .catch((err) => console.log(err));
     }, []);
+
+    useEffect(() => {
+        if (cocktails) {
+            setLoading(false);
+        } else {
+            setLoading(true);
+        }
+    });
     return (
         <>
             <h1 style={{ color: "white", textAlign: "center" }}>Home</h1>
